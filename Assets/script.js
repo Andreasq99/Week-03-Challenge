@@ -8,7 +8,10 @@ var nums = ["0","1","2","3","4","5","6","7","8","9"];
 
 var options = [0,false, false, false, false];
 
-
+var lwrcs = document.querySelector("#lwrcs");
+var uprcs = document.querySelector("#uprcs");
+var nmbrs = document.querySelector("#nmbrs");
+var spchrs = document.querySelector("#spchrs");
 
 // Goes through the options for password length and characters. Returns an array; if the password length is too short it returns ["too short"], if it is too long then it returns ["too long"], else it returns an alphabet for the generator to use.
 function passwordOptions(){
@@ -25,28 +28,27 @@ function passwordOptions(){
   if(options[1]){
     passwordAlphabet = passwordAlphabet.concat(alph);
     console.log("alph");
-    var lwrcs = document.querySelector("#lwrcs");
-    setTimeout(lwrcs.innerHTML = '✅ Lowercase letters', 100);
+    
+    window.requestAnimationFrame( () => {
+    lwrcs.innerHTML = '✅ Lowercase letters';
+    } );
   }
 
   options[2] = window.confirm("Do you want to use uppercase letters?");
   if(options[2]){
     passwordAlphabet = passwordAlphabet.concat(Alph);
-    var uprcs = document.querySelector("#uprcs");
     setTimeout(uprcs.innerHTML = '✅ Uppercase letters', 100);
   }
   
   options[3] = window.confirm("Do you want to use numbers?");
   if(options[3]){
     passwordAlphabet = passwordAlphabet.concat(nums);
-    var nmbrs = document.querySelector("#nmbrs");
     setTimeout(nmbrs.innerHTML = '✅ Numbers', 100);
   }
 
   options[4] = window.confirm("Do you want to use special characters?");
   if(options[4]){
     passwordAlphabet = passwordAlphabet.concat(spChars);
-    var spchrs = document.querySelector("#spchrs");
     setTimeout(spchrs.innerHTML = '✅ Special characters', 100);
   }
   console.log(options);
@@ -92,6 +94,10 @@ function writePassword() {
  function resetPassword() {
   var passwordText = document.querySelector("#password");
   passwordText.value = "";
+  lwrcs.innerHTML = "⬜ Lowercase letters";
+  uprcs.innerHTML = "⬜ Uppercase letters";
+  nmbrs.innerHTML = "⬜ Numbers";
+  spchrs.innerHTML = "⬜ Special Characters";
 }
 
 // Add event listener to generate button
